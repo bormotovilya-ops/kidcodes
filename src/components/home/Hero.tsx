@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
@@ -35,15 +35,33 @@ export const Hero = () => {
     return target;
   };
 
+  const audienceMode = useMemo<"neutral" | "under3" | "over3">(() => {
+    if (!age) return "neutral";
+    if (age === "1,5–2" || age === "2–3") return "under3";
+    return "over3";
+  }, [age]);
+
+  useEffect(() => {
+    document.body.setAttribute("data-home-mix", audienceMode);
+    return () => {
+      document.body.removeAttribute("data-home-mix");
+    };
+  }, [audienceMode]);
+
+  const babyVisual =
+    theme === "baby" ||
+    (theme === "hybrid" && audienceMode !== "over3") ||
+    audienceMode === "under3";
+
   return (
     <section className="relative overflow-hidden section">
       {/* Decorative blobs / clay */}
       <span className="blob blob-1 -left-16 top-10 h-64 w-64 opacity-70" aria-hidden />
       <span className="blob blob-2 right-0 top-40 h-40 w-40 opacity-70" aria-hidden />
 
-      {theme === "baby" && (
+      {babyVisual && (
         <>
-          <img src={clayStar} alt="" aria-hidden className="pointer-events-none absolute -top-4 right-8 h-16 w-16 animate-float md:h-24 md:w-24" />
+          <img src={clayStar} alt="" aria-hidden className="pointer-events-none absolute top-20 right-8 h-16 w-16 animate-float md:top-24 md:h-24 md:w-24" />
           <img src={clayHeart} alt="" aria-hidden className="pointer-events-none absolute bottom-10 left-4 h-14 w-14 animate-float md:h-20 md:w-20" />
         </>
       )}
@@ -54,21 +72,26 @@ export const Hero = () => {
             <Sparkles className="h-3.5 w-3.5" /> Рязань · 2 филиала · Лицензия
           </span>
           <h1 className="text-4xl leading-[1.05] sm:text-5xl lg:text-6xl">
-            Экосистема развития
+            Экосистема развития ребёнка 1,5–7 лет
             <br />
-            детей <span className="marker">1,5–7 лет</span>
+            <span className="marker">в одном месте</span>
           </h1>
           <p className="mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">
-            Полный день в Montessori-среде, своя кухня, 20+ камер и уникальная программа
-            плавной адаптации «Ступени в сад» — от первого часа вместе с мамой до уверенного «пока-пока».
+            Билингвальный Монтессори-сад полного дня. Международный стандарт AMI, лицензия на образование,
+            сильная академическая база и большой выбор доп. занятий без перегруза.
           </p>
+          <div className="mt-4 flex flex-wrap gap-2 text-xs sm:text-sm">
+            <span className="chip bg-primary/10 text-primary">Стандарт AMI</span>
+            <span className="chip bg-primary/10 text-primary">Лицензия на образование</span>
+            <span className="chip bg-primary/10 text-primary">Билингвальная среда</span>
+          </div>
 
           <div className="mt-6 flex flex-wrap gap-3">
             <Button asChild size="lg" className="btn-organic">
-              <Link to="/immersion">Посмотреть сад <ArrowRight className="ml-1 h-4 w-4" /></Link>
+              <Link to="/#final-cta">Записаться на экскурсию <ArrowRight className="ml-1 h-4 w-4" /></Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="btn-organic">
-              <Link to="/steps">Программа «Ступени»</Link>
+              <Link to="/steps">Узнать, с чего начать</Link>
             </Button>
           </div>
 
@@ -143,7 +166,7 @@ export const Hero = () => {
         <div className="relative">
           <div className="absolute -left-6 top-8 h-64 w-64 rounded-full bg-[hsl(var(--blob-1))] opacity-80 blur-[1px]" aria-hidden />
           <div className="absolute -right-4 bottom-0 h-40 w-40 rounded-full bg-[hsl(var(--blob-2))] opacity-90" aria-hidden />
-          {theme === "baby" ? (
+          {babyVisual ? (
             <img
               src={clayPyramid}
               alt="Ступени в сад — иллюстрация"

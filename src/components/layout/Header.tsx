@@ -25,8 +25,28 @@ export const Header = () => {
           <Phone className="h-4 w-4" /> +7 (4912) 00-00-00
         </a>
 
-        <Button onClick={() => setBooking("tour")} className="hidden sm:inline-flex">
+      </div>
+
+      <div className="fixed bottom-3 right-3 z-50 flex max-w-[calc(100vw-1.5rem)] flex-col gap-2 sm:hidden">
+        <Button size="sm" onClick={() => setBooking("tour")} className="w-full justify-center shadow-[var(--shadow-card)]">
           Экскурсия
+        </Button>
+        <Button size="sm" variant="outline" onClick={() => setBooking("waitlist")} className="w-full justify-center bg-background/95 shadow-[var(--shadow-soft)] backdrop-blur">
+          Лист ожидания
+        </Button>
+      </div>
+
+      <div className="fixed right-3 top-20 z-30 hidden w-48 flex-col gap-2 md:flex">
+        <Button size="sm" onClick={() => setBooking("tour")} className="w-full justify-center shadow-[var(--shadow-card)]">
+          Экскурсия
+        </Button>
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() => setBooking("waitlist")}
+          className="w-full justify-center bg-background/95 shadow-[var(--shadow-soft)] backdrop-blur"
+        >
+          Лист ожидания
         </Button>
       </div>
 

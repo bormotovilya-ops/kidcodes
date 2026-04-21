@@ -1,5 +1,5 @@
 import { useTheme } from "@/theme/ThemeProvider";
-import { Sparkles, Baby } from "lucide-react";
+import { Sparkles, Baby, Palette } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export const ThemeSwitch = ({ className }: { className?: string }) => {
@@ -26,6 +26,20 @@ export const ThemeSwitch = ({ className }: { className?: string }) => {
         <Sparkles className="h-3.5 w-3.5" />
         <span className="hidden sm:inline">Обычная</span>
         <span className="sm:hidden">Обыч.</span>
+      </button>
+      <button
+        type="button"
+        role="tab"
+        aria-selected={theme === "hybrid"}
+        onClick={() => setTheme("hybrid")}
+        className={cn(
+          "flex items-center gap-1.5 rounded-full px-3 py-1.5 font-semibold transition-colors",
+          theme === "hybrid" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground",
+        )}
+      >
+        <Palette className="h-3.5 w-3.5" />
+        <span className="hidden sm:inline">Гибрид</span>
+        <span className="sm:hidden">Гибр.</span>
       </button>
       <button
         type="button"

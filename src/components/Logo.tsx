@@ -17,7 +17,7 @@ export const Logo = ({ className }: { className?: string }) => {
           aria-hidden
           className={cn(
             "absolute -top-1 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-primary",
-            theme === "baby" && "h-2 w-2",
+            (theme === "baby" || theme === "hybrid") && "h-2 w-2",
           )}
         />
       </span>

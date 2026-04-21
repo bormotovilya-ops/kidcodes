@@ -49,7 +49,7 @@ const StepDetail = ({ slug }: { slug: string }) => {
           </div>
           <div className="relative">
             <span className="blob blob-1 left-0 top-0 h-48 w-48 opacity-60" aria-hidden />
-            <img src={theme === "baby" ? CLAY[idx] : clayPyramid} alt="" className="relative z-10 mx-auto h-64 object-contain animate-float" />
+            <img src={theme === "baby" || theme === "hybrid" ? CLAY[idx] : clayPyramid} alt="" className="relative z-10 mx-auto h-64 object-contain animate-float" />
           </div>
         </div>
       </section>
@@ -94,7 +94,7 @@ const StepsHub = () => {
           {STEPS.map((s, i) => (
             <li key={s.slug} className="relative">
               <Link to={`/steps/${s.slug}`} className="card-soft block h-full hover:border-primary">
-                {theme === "baby" && <img src={CLAY[i]} alt="" aria-hidden className="mb-3 h-20 w-20 object-contain" />}
+                {(theme === "baby" || theme === "hybrid") && <img src={CLAY[i]} alt="" aria-hidden className="mb-3 h-20 w-20 object-contain" />}
                 <div className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground font-bold">{s.n}</div>
                 <div className="mt-3 text-xl font-bold">{s.title}</div>
                 <div className="text-xs text-muted-foreground">{s.age}</div>

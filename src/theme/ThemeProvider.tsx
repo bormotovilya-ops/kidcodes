@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 
-export type Theme = "classic" | "baby";
+export type Theme = "classic" | "hybrid" | "baby";
 
 interface ThemeContextValue {
   theme: Theme;
@@ -22,7 +22,12 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   }, [theme]);
 
   const setTheme = (t: Theme) => setThemeState(t);
-  const toggle = () => setThemeState((p) => (p === "classic" ? "baby" : "classic"));
+  const toggle = () =>
+    setThemeState((p) => {
+      if (p === "classic") return "hybrid";
+      if (p === "hybrid") return "baby";
+      return "classic";
+    });
 
   return <ThemeContext.Provider value={{ theme, setTheme, toggle }}>{children}</ThemeContext.Provider>;
 };

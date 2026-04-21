@@ -113,6 +113,52 @@
     --shadow-card: 0 10px 30px -12px hsl(16 62% 54% / 0.22);
     --shadow-soft: 0 6px 20px -10px hsl(20 30% 18% / 0.15);
   }
+
+  [data-theme="hybrid"] {
+    --background: 28 35% 97%;
+    --foreground: 222 40% 14%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 40% 14%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 40% 14%;
+
+    --primary: 20 82% 58%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 20 86% 66%;
+
+    --secondary: 205 65% 93%;
+    --secondary-foreground: 222 40% 14%;
+
+    --accent: 42 85% 74%;
+    --accent-foreground: 222 40% 14%;
+
+    --muted: 30 35% 93%;
+    --muted-foreground: 215 14% 42%;
+
+    --destructive: 0 76% 58%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 28% 88%;
+    --input: 214 28% 88%;
+    --ring: 20 82% 58%;
+
+    --surface: 0 0% 100%;
+    --surface-soft: 204 78% 96%;
+    --highlight: 42 90% 73%;
+    --blob-1: 202 52% 86%;
+    --blob-2: 355 52% 88%;
+
+    --radius: 1rem;
+    --radius-lg: 1.7rem;
+
+    --font-display: "Nunito", "Montserrat", "Inter", system-ui, sans-serif;
+    --font-body: "Inter", "Nunito", system-ui, sans-serif;
+
+    --shadow-card: 0 12px 30px -14px hsl(20 82% 58% / 0.2);
+    --shadow-soft: 0 8px 22px -12px hsl(222 40% 14% / 0.16);
+  }
 }
 
 @layer base {
@@ -130,6 +176,16 @@
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
+  body[data-home-mix="under3"] {
+    --radius-lg: 1.9rem;
+    --shadow-card: 0 14px 30px -14px hsl(16 62% 54% / 0.24);
+  }
+
+  body[data-home-mix="over3"] {
+    --radius-lg: 1.35rem;
+    --shadow-card: 0 12px 28px -14px hsl(222 47% 11% / 0.18);
+  }
+
   h1, h2, h3, h4 {
     font-family: var(--font-display);
     font-weight: 800;
@@ -141,6 +197,13 @@
   [data-theme="baby"] h3 {
     font-weight: 700;
     letter-spacing: -0.01em;
+  }
+
+  [data-theme="hybrid"] h1,
+  [data-theme="hybrid"] h2,
+  [data-theme="hybrid"] h3 {
+    font-weight: 750;
+    letter-spacing: -0.015em;
   }
 }
 
@@ -192,47 +255,166 @@
     @apply py-12 sm:py-16 lg:py-24;
   }
 
+  .section-decor {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .decor-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  @keyframes decor-float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(2deg); }
+  }
+
+  .decor-item {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.18;
+    filter: saturate(1.05);
+  }
+
+  .decor-star {
+    top: 8%;
+    right: 4%;
+    width: 68px;
+    animation: decor-float 9s ease-in-out infinite;
+  }
+
+  .decor-heart {
+    top: 42%;
+    left: 2%;
+    width: 76px;
+    animation: decor-float 11s ease-in-out infinite reverse;
+  }
+
+  .decor-wave {
+    bottom: 10%;
+    right: 10%;
+    width: 84px;
+    animation: decor-float 10s ease-in-out infinite;
+  }
+
+  .decor-pyramid {
+    bottom: 4%;
+    left: 12%;
+    width: 92px;
+    animation: decor-float 12s ease-in-out infinite reverse;
+  }
+
+  .section-decor > .container-x {
+    position: relative;
+    z-index: 1;
+  }
+
+  body[data-home-mix="under3"] .decor-item {
+    opacity: 0.28;
+  }
+
+  body[data-home-mix="over3"] .decor-item {
+    opacity: 0.12;
+  }
+
+  @media (max-width: 768px) {
+    .decor-item {
+      width: 56px;
+      opacity: 0.12;
+    }
+    .decor-heart,
+    .decor-wave {
+      display: none;
+    }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px) scale(0.985);
+    filter: blur(6px);
+    transition:
+      opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform, filter;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+      filter: none;
+      transition: none;
+    }
+  }
+
   /* Classic theme: alternate plain and textured section backgrounds */
-  [data-theme="classic"] main .section {
+  [data-theme="classic"] main .section,
+  [data-theme="hybrid"] main .section {
     position: relative;
     isolation: isolate;
   }
 
-  [data-theme="classic"] main .section:nth-of-type(odd) {
+  [data-theme="classic"] main .section:nth-of-type(odd),
+  [data-theme="hybrid"] main .section:nth-of-type(odd) {
     background-color: hsl(var(--background));
   }
 
-  [data-theme="classic"] main .section:nth-of-type(even) {
+  [data-theme="classic"] main .section:nth-of-type(even),
+  [data-theme="hybrid"] main .section:nth-of-type(even) {
     background-color: hsl(var(--surface-soft));
   }
 
-  [data-theme="classic"] main .section:nth-of-type(even)::before {
+  [data-theme="classic"] main .section:nth-of-type(even)::before,
+  [data-theme="hybrid"] main .section:nth-of-type(even)::before {
     content: "";
     position: absolute;
     inset: 0;
     z-index: 0;
     pointer-events: none;
     background-image: url("./assets/classic-pattern.png");
-    background-repeat: repeat;
-    background-size: 520px auto;
-    opacity: 0.18;
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+    opacity: 0.14;
   }
 
-  [data-theme="classic"] main .section:nth-of-type(even)::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background-image: url("./assets/classic-pattern-with-pyramid.png");
-    background-repeat: repeat;
-    background-position: center;
-    background-size: 820px auto;
-    opacity: 0.28;
-  }
-
-  [data-theme="classic"] main .section:nth-of-type(even) > * {
+  [data-theme="classic"] main .section:nth-of-type(even) > *,
+  [data-theme="hybrid"] main .section:nth-of-type(even) > * {
     position: relative;
     z-index: 1;
+  }
+
+  html[data-theme="classic"] body[data-home-mix="under3"] main .section:nth-of-type(even)::before,
+  html[data-theme="baby"] body[data-home-mix="under3"] main .section:nth-of-type(even)::before {
+    opacity: 0.2;
+    background-position: center;
+  }
+
+  body[data-home-mix="under3"] .chip {
+    background: hsl(355 60% 92%);
+  }
+
+  body[data-home-mix="under3"] .marker {
+    background: linear-gradient(180deg, transparent 55%, hsl(355 70% 78% / 0.7) 55%);
+  }
+
+  body[data-home-mix="over3"] .chip {
+    background: hsl(210 50% 94%);
+  }
+
+  body[data-home-mix="over3"] .marker {
+    background: linear-gradient(180deg, transparent 55%, hsl(48 100% 66% / 0.9) 55%);
   }
 }
