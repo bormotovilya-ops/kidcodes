@@ -7,7 +7,7 @@ import { DAY_RHYTHM, LOCATIONS, REASONS, TEAM } from "@/data/site";
 import { ArrowRight, Check, ShieldCheck, Utensils, Video } from "lucide-react";
 import interior from "@/assets/interior.jpg";
 import kidsGroup from "@/assets/kids-group.jpg";
-import kid1 from "@/assets/kid-1.jpg";
+import kid1 from "@/assets/kid-boy.png";
 
 const Immersion = () => {
   const [booking, setBooking] = useState<null | "tour" | "waitlist">(null);

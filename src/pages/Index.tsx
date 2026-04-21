@@ -13,7 +13,7 @@ import clayStar from "@/assets/clay-star.png";
 import clayWave from "@/assets/clay-wave.png";
 import kidsGroup from "@/assets/kids-group.jpg";
 import interior from "@/assets/interior.jpg";
-import kid1 from "@/assets/kid-1.jpg";
+import kid1 from "@/assets/kid-boy.png";
 import { useState } from "react";
 import { BookingModal } from "@/components/BookingModal";
 

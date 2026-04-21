@@ -1,6 +1,6 @@
 import { SectionHeader } from "@/components/SectionHeader";
 import { BLOG } from "@/data/site";
-import kid1 from "@/assets/kid-1.jpg";
+import kid1 from "@/assets/kid-boy.png";
 import kidsGroup from "@/assets/kids-group.jpg";
 import interior from "@/assets/interior.jpg";
 

@@ -191,4 +191,48 @@
   .section {
     @apply py-12 sm:py-16 lg:py-24;
   }
+
+  /* Classic theme: alternate plain and textured section backgrounds */
+  [data-theme="classic"] main .section {
+    position: relative;
+    isolation: isolate;
+  }
+
+  [data-theme="classic"] main .section:nth-of-type(odd) {
+    background-color: hsl(var(--background));
+  }
+
+  [data-theme="classic"] main .section:nth-of-type(even) {
+    background-color: hsl(var(--surface-soft));
+  }
+
+  [data-theme="classic"] main .section:nth-of-type(even)::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: url("./assets/classic-pattern.png");
+    background-repeat: repeat;
+    background-size: 520px auto;
+    opacity: 0.18;
+  }
+
+  [data-theme="classic"] main .section:nth-of-type(even)::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: url("./assets/classic-pattern-with-pyramid.png");
+    background-repeat: repeat;
+    background-position: center;
+    background-size: 820px auto;
+    opacity: 0.28;
+  }
+
+  [data-theme="classic"] main .section:nth-of-type(even) > * {
+    position: relative;
+    z-index: 1;
+  }
 }

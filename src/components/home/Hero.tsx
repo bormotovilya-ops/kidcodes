@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { useTheme } from "@/theme/ThemeProvider";
-import heroKid from "@/assets/kid-2.jpg";
+import heroKid from "@/assets/kid-boy.png";
 import clayPyramid from "@/assets/clay-pyramid.png";
 import clayStar from "@/assets/clay-star.png";
 import clayHeart from "@/assets/clay-heart.png";

@@ -1,6 +1,6 @@
 import { SectionHeader } from "@/components/SectionHeader";
 import { TEAM } from "@/data/site";
-import kid1 from "@/assets/kid-1.jpg";
+import kid1 from "@/assets/kid-boy.png";
 
 const Team = () => (
   <section className="section">

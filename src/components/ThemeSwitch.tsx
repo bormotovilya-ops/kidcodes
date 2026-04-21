@@ -11,7 +11,7 @@ export const ThemeSwitch = ({ className }: { className?: string }) => {
         className,
       )}
       role="tablist"
-      aria-label="Переключатель дизайна"
+      aria-label="Переключатель темы"
     >
       <button
         type="button"
@@ -24,8 +24,8 @@ export const ThemeSwitch = ({ className }: { className?: string }) => {
         )}
       >
         <Sparkles className="h-3.5 w-3.5" />
-        <span className="hidden sm:inline">Сад 1,5–7</span>
-        <span className="sm:hidden">Сад</span>
+        <span className="hidden sm:inline">Обычная</span>
+        <span className="sm:hidden">Обыч.</span>
       </button>
       <button
         type="button"
@@ -38,8 +38,8 @@ export const ThemeSwitch = ({ className }: { className?: string }) => {
         )}
       >
         <Baby className="h-3.5 w-3.5" />
-        <span className="hidden sm:inline">Малыши 1,5–3</span>
-        <span className="sm:hidden">Малыши</span>
+        <span className="hidden sm:inline">Малышковая</span>
+        <span className="sm:hidden">Малыш.</span>
       </button>
     </div>
   );
