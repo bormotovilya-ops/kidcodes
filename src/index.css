@@ -1,0 +1,194 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   KIDCODES Design System — two themes
+   Theme A ("classic" / franchise): white + coral + yellow highlight
+   Theme B ("baby" / brochure): cream + terracotta + sage/blue/pink
+   All colors HSL. Toggle via <html data-theme="classic|baby">
+   ========================================================================== */
+
+@layer base {
+  :root,
+  [data-theme="classic"] {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Brand — coral orange like kidcodes.ru/franchise */
+    --primary: 16 94% 58%;              /* #F96332 */
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 16 94% 68%;
+
+    --secondary: 210 70% 95%;            /* soft blue blob */
+    --secondary-foreground: 222 47% 11%;
+
+    --accent: 48 100% 65%;               /* yellow highlight */
+    --accent-foreground: 222 47% 11%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 16 94% 58%;
+
+    --surface: 0 0% 100%;
+    --surface-soft: 210 70% 97%;
+    --highlight: 48 100% 65%;            /* marker highlight */
+    --blob-1: 210 80% 88%;               /* blue blob */
+    --blob-2: 48 100% 75%;               /* yellow blob */
+
+    --radius: 0.75rem;
+    --radius-lg: 1.5rem;
+
+    --font-display: "Montserrat", "Inter", system-ui, sans-serif;
+    --font-body: "Inter", system-ui, sans-serif;
+
+    --shadow-card: 0 10px 30px -12px hsl(16 94% 58% / 0.18);
+    --shadow-soft: 0 6px 20px -10px hsl(222 47% 11% / 0.12);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5% 26%;
+    --sidebar-primary: 16 94% 58%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 5% 96%;
+    --sidebar-accent-foreground: 240 6% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 16 94% 58%;
+  }
+
+  [data-theme="baby"] {
+    --background: 36 40% 94%;            /* cream #F5EFE4 */
+    --foreground: 20 30% 18%;
+
+    --card: 36 50% 97%;
+    --card-foreground: 20 30% 18%;
+
+    --popover: 36 50% 97%;
+    --popover-foreground: 20 30% 18%;
+
+    /* Brand — terracotta from brochure */
+    --primary: 16 62% 54%;               /* #D96B3C */
+    --primary-foreground: 36 40% 97%;
+    --primary-glow: 16 70% 65%;
+
+    --secondary: 355 50% 85%;            /* dusty pink */
+    --secondary-foreground: 20 30% 18%;
+
+    --accent: 140 20% 72%;               /* sage */
+    --accent-foreground: 20 30% 18%;
+
+    --muted: 36 30% 88%;
+    --muted-foreground: 20 15% 40%;
+
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 25% 82%;
+    --input: 30 25% 82%;
+    --ring: 16 62% 54%;
+
+    --surface: 36 50% 97%;
+    --surface-soft: 355 60% 94%;
+    --highlight: 42 70% 75%;
+    --blob-1: 200 40% 82%;               /* soft blue */
+    --blob-2: 355 55% 88%;               /* pink */
+
+    --radius: 1.25rem;
+    --radius-lg: 2rem;
+
+    --font-display: "Nunito", "Comfortaa", system-ui, sans-serif;
+    --font-body: "Nunito", system-ui, sans-serif;
+
+    --shadow-card: 0 10px 30px -12px hsl(16 62% 54% / 0.22);
+    --shadow-soft: 0 6px 20px -10px hsl(20 30% 18% / 0.15);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  [data-theme="baby"] h1,
+  [data-theme="baby"] h2,
+  [data-theme="baby"] h3 {
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer components {
+  /* Marker-style highlight on words (classic theme uses yellow under text) */
+  .marker {
+    background: linear-gradient(180deg, transparent 55%, hsl(var(--highlight) / 0.9) 55%);
+    padding: 0 0.15em;
+    border-radius: 0.15em;
+  }
+
+  [data-theme="baby"] .marker {
+    background: linear-gradient(180deg, transparent 60%, hsl(var(--highlight) / 0.8) 60%);
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(2px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .blob-1 { background: hsl(var(--blob-1)); }
+  .blob-2 { background: hsl(var(--blob-2)); }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium;
+    background: hsl(var(--muted));
+    color: hsl(var(--foreground));
+  }
+
+  .card-soft {
+    @apply rounded-[var(--radius-lg)] bg-card p-6;
+    box-shadow: var(--shadow-card);
+  }
+
+  /* Baby theme: hand-drawn-ish button */
+  [data-theme="baby"] .btn-organic {
+    border: 2px solid hsl(var(--foreground) / 0.15);
+    box-shadow: 3px 3px 0 hsl(var(--foreground) / 0.12);
+  }
+
+  .container-x {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .section {
+    @apply py-12 sm:py-16 lg:py-24;
+  }
+}
